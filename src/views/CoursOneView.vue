@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import FillInText from '@/components/FillInText.vue';
 import { data } from '@/data/textData';
+import Monaco from '@/components/Monaco.vue';
 
 const currentIndex = ref(0);
 const textData = ref([]);
@@ -46,5 +47,6 @@ onMounted(() => (textData.value = data));
         </button>
       </div>
     </div>
-  </div>
+    <Monaco />
+</div>
 </template>
