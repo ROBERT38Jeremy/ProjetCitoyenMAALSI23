@@ -3,7 +3,7 @@
         <div class="editor">
             <Monaco />
         </div>
-        <div v-html="htmlData.htmlDataValue"></div>
+        <div v-html="htmlData.htmlCss"></div>
     </div>
 </template>
 <script setup>
