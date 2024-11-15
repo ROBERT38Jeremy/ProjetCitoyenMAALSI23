@@ -10,9 +10,9 @@
 <script setup>
 import { createEditor, createModel } from "@/composables/monaco-config.js";
 import { onMounted, ref } from "vue";
-import usehtmlDataStore from "@/stores/htmlData.js";
+import usecodeDataStore from "@/stores/codeData.js";
 import ButtonCustom from "@/components/ButtonCustom.vue"
-const htmlData = usehtmlDataStore();
+const codeData = usecodeDataStore();
 
 let editor;
 
@@ -45,8 +45,8 @@ function selectModel({ data= '', language }) {
     }
 
     function updateCode({ data, language }) {
-        if(language === 'html') return htmlData.updatehtmlDataValue(data);
-        return htmlData.updateCssDataValue(data);
+        if(language === 'html') return codeData.updatecodeDataValue(data);
+        return codeData.updateCssDataValue(data);
     }
 onMounted(() => {
     editor = createEditor(document.getElementById('editor'), { language: languageSelected.value })

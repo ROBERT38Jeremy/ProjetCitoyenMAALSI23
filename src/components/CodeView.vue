@@ -3,14 +3,14 @@
         <div class="editor">
             <Monaco />
         </div>
-        <div v-html="htmlData.htmlCss"></div>
+        <div v-html="codeData.htmlCss"></div>
     </div>
 </template>
 <script setup>
 import Monaco from '@/components/Monaco.vue';
-import usehtmlDataStore from "@/stores/htmlData.js";
+import usecodeDataStore from "@/stores/codeData.js";
 
-const htmlData = usehtmlDataStore();
+const codeData = usecodeDataStore();
 
 </script>
 <style scoped>
