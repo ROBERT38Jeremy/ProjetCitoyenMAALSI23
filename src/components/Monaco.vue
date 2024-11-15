@@ -1,30 +1,69 @@
 <template>
-    <div id="editor">
+    <ButtonCustom @click="selectHTML" :actif="!isCssActif" text="HTML" />
+    <ButtonCustom @click="selectCss" :actif="isCssActif" text="CSS" />
+    <div>
+        <div id="editor">
+    </div>
     </div>
 </template>
 
 <script setup>
-import { createEditor } from "@/composables/monaco-config.js";
-import { onMounted } from "vue";
+import { createEditor, createModel } from "@/composables/monaco-config.js";
+import { onMounted, ref } from "vue";
 import usehtmlDataStore from "@/stores/htmlData.js";
-
+import ButtonCustom from "@/components/ButtonCustom.vue"
 const htmlData = usehtmlDataStore();
 
 let editor;
 
+let modelList = [];
+let isCssActif = ref(false);
+
+const languageSelected = ref('html');
+
+function selectModel({ data= '', language }) {
+    languageSelected.value = language
+    isCssActif.value = language === 'css' ? true : false;
+    console.log({ isCssActif: isCssActif.value })
+
+    const modelSelected = modelList.find((model) => model.language === language)
+    if(modelSelected) return editor.setModel(modelSelected.model);
+
+      // Créer un nouveau modèle avec le language choisi et le contenu correspondant
+      const newModel = createModel(data, language);
+      modelList.push({ language, model: newModel})
+
+      // Remplacer le modèle actuel par le nouveau
+      editor.setModel(newModel);
+    }
+
+    const selectHTML = () => {
+        selectModel({ language: "html"})
+    }
+    const selectCss = () => {
+        selectModel({ language: "css" })
+    }
+
+    function updateCode({ data, language }) {
+        if(language === 'html') return htmlData.updatehtmlDataValue(data);
+        return htmlData.updateCssDataValue(data);
+    }
 onMounted(() => {
-    editor = createEditor(document.getElementById('editor'), { language: 'html'})
+    editor = createEditor(document.getElementById('editor'), { language: languageSelected.value })
+
+    selectModel({ language: 'html' })
 
     editor.onDidChangeModelContent((event) => {
-    // Obtenir le texte actuel dans l'éditeur
-    htmlData.updatehtmlDataValue(editor.getValue());
+    // getValue() = Obtenir le texte actuel dans l'éditeur
+    updateCode({ data: editor.getValue(), language: languageSelected.value })
 });
 })
 </script>
-<style>
+<style scoped>
 #editor {
     width: 100%;
     height: 100%;
     min-height: 400px;
+    margin-bottom: 10px;
 }
 </style>
