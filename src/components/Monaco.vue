@@ -1,6 +1,7 @@
 <template>
     <ButtonCustom @click="selectHTML" :actif="!isCssActif" text="HTML" />
     <ButtonCustom @click="selectCss" :actif="isCssActif" text="CSS" />
+    <!-- <ButtonCustom @click="updateModelHtmlAndCss({ newCss: 'p { color: red }', newHtml: '<p>a new paragraph in color red</p>' })" :actif="isCssActif" text="Exemple updateModelHtmlAndCss" /> -->
     <div>
         <div id="editor">
     </div>
@@ -26,6 +27,13 @@ let isCssActif = ref(false);
 
 const languageSelected = ref('html');
 
+function newModel({ data, language }) {
+      // Créer un nouveau modèle avec le language choisi et le contenu correspondant
+      const model = createModel(data, language);
+      modelList.push({ language, model })
+      return model
+}
+
 function selectModel({ data= '', language }) {
     languageSelected.value = language
     isCssActif.value = language === 'css' ? true : false;
@@ -34,12 +42,10 @@ function selectModel({ data= '', language }) {
     const modelSelected = modelList.find((model) => model.language === language)
     if(modelSelected) return editor.setModel(modelSelected.model);
 
-      // Créer un nouveau modèle avec le language choisi et le contenu correspondant
-      const newModel = createModel(data, language);
-      modelList.push({ language, model: newModel})
+    const model = newModel({ data, language })
 
       // Remplacer le modèle actuel par le nouveau
-      editor.setModel(newModel);
+      editor.setModel(model);
     }
 
     const selectHTML = () => {
@@ -54,9 +60,27 @@ function selectModel({ data= '', language }) {
         return codeData.updateCssDataValue(data);
     }
 
-    function setEditorValue(newValue) {
+    /** No use currently */
+    function setCurrentModelValue(newValue) {
         editor.setValue(newValue)
     }
+    /** */
+
+    function upsertModel({ data, language }) {
+        const modelToUpsert = modelList.find((model) => model.language === language)
+        
+        if (modelToUpsert) return modelToUpsert.model.setValue(data)
+        return newModel({ data, language })
+    }
+
+    function updateModelHtmlAndCss({ newCss, newHtml }){
+        upsertModel({ data: newCss, language: "css" })
+        upsertModel({ data: newHtml, language: "html" })
+
+        codeData.updateCssDataValue(newCss);
+        codeData.updateHtmlDataValue(newHtml);
+    }
+
 onMounted(() => {
     editor = createEditor(document.getElementById('editor'), { language: languageSelected.value })
 
