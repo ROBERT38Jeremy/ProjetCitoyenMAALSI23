@@ -5,7 +5,18 @@ const usecodeDataStore = defineStore('codeData', () => {
   const cssDataValue = ref('');
   const codeHtmlValue = ref('');
   const htmlCss = computed(() => {
-    return `${codeHtmlValue.value}<style scoped>${cssDataValue.value}</style>`
+    return `
+    <div class=scoped>
+      ${codeHtmlValue.value}
+    <div>
+    <style>
+      .scoped {
+        * {
+          all: revert;
+        }
+        ${cssDataValue.value}
+      }
+    </style>`
   })
 
   function updateCssDataValue(value) {
