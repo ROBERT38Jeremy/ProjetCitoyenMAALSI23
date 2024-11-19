@@ -8,6 +8,11 @@
 </template>
 
 <script setup>
+/** Monaco
+ * https://microsoft.github.io/monaco-editor/
+    * doc
+    * https://microsoft.github.io/monaco-editor/docs.html
+ */
 import { createEditor, createModel } from "@/composables/monaco-config.js";
 import { onMounted, ref } from "vue";
 import usecodeDataStore from "@/stores/codeData.js";
@@ -47,6 +52,10 @@ function selectModel({ data= '', language }) {
     function updateCode({ data, language }) {
         if(language === 'html') return codeData.updateHtmlDataValue(data);
         return codeData.updateCssDataValue(data);
+    }
+
+    function setEditorValue(newValue) {
+        editor.setValue(newValue)
     }
 onMounted(() => {
     editor = createEditor(document.getElementById('editor'), { language: languageSelected.value })
