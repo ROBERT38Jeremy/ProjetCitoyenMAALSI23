@@ -45,7 +45,7 @@ function selectModel({ data= '', language }) {
     }
 
     function updateCode({ data, language }) {
-        if(language === 'html') return codeData.updatecodeDataValue(data);
+        if(language === 'html') return codeData.updateHtmlDataValue(data);
         return codeData.updateCssDataValue(data);
     }
 onMounted(() => {

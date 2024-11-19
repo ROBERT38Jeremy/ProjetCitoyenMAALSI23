@@ -3,24 +3,20 @@ import { defineStore } from 'pinia'
 
 const usecodeDataStore = defineStore('codeData', () => {
   const cssDataValue = ref('');
-  const codeDataValue = ref('');
+  const codeHtmlValue = ref('');
   const htmlCss = computed(() => {
-    return `${codeDataValue.value}<style scoped>${cssDataValue.value}</style>`
+    return `${codeHtmlValue.value}<style scoped>${cssDataValue.value}</style>`
   })
 
   function updateCssDataValue(value) {
     cssDataValue.value = value;
   }
 
-  function updatecodeDataValue(value) {
-    codeDataValue.value = value;
+  function updateHtmlDataValue(value) {
+    codeHtmlValue.value = value;
   }
 
-  function getCodeHtmlAndCss() {
-    
-  }
-
-  return { cssDataValue, codeDataValue, htmlCss, updateCssDataValue, updatecodeDataValue }
+  return { cssDataValue, codeHtmlValue, htmlCss, updateCssDataValue, updateHtmlDataValue }
 })
 
 export default usecodeDataStore;
