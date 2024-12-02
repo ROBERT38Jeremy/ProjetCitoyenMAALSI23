@@ -20,7 +20,7 @@ onMounted(() => (textData.value = data));
 </script>
 
 <template>
-  <div>
+  <div class="mb-20">
     <FillInText
       v-if="textData.length > 0"
       :key="currentIndex"
@@ -28,6 +28,7 @@ onMounted(() => (textData.value = data));
       :text="textData[currentIndex].text"
       :words="textData[currentIndex].words"
       :correctWords="textData[currentIndex].correctWords"
+      :exampleCode="textData[currentIndex].exampleCode"
     />
     <div class="flex flex-col justify-center items-center w-full">
       <div class="flex justify-end mt-3 w-10/12">
