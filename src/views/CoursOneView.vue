@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import FillInText from '@/components/FillInText.vue';
 import { data } from '@/data/textData';
-import CodeView from '@/components/CodeView.vue'; 
+import CodeView from '@/components/CodeView.vue';
 
 const currentIndex = ref(0);
 const textData = ref([]);
