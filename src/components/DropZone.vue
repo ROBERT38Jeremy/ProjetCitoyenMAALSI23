@@ -1,16 +1,21 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, toRef, watch } from 'vue';
 import { useDropZone } from '@vueuse/core';
 
 const props = defineProps({
   expectedWord: String,
   index: Number,
   onWordDropped: Function,
+  defaultValue: String
 });
 
 const dropZoneRef = ref(null);
 const droppedWord = ref('');
+const defaultValue = toRef(props, 'defaultValue');
 
+watch(defaultValue, () => {
+  droppedWord.value = defaultValue.value;
+})
 // Initialisation de la zone de drop
 onMounted(() => {
   useDropZone(dropZoneRef, {

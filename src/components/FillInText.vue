@@ -1,9 +1,15 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch, onBeforeMount, onMounted } from 'vue';
 import DropZone from './DropZone.vue';
 import { useText } from '@/composables/useText';
+import { useSessionDatas } from '@/stores/SessionDatas';
+import { storeToRefs } from 'pinia';
+
+const { initSessionResponse, addSessionResponse } = useSessionDatas();
+const { sessionResponse } = storeToRefs(useSessionDatas());
 
 const props = defineProps({
+  currentIndex: Number,
   text: String,
   words: Array, // Tous les mots disponibles (y compris les distracteurs)
   correctWords: Array, // Mots corrects correspondant aux zones de drop
@@ -48,6 +54,22 @@ async function copyToClipboard(text) {
     console.error('Échec de la copie :', error);
   }
 }
+
+watch(isComplete, () => {
+  addSessionResponse(props.currentIndex, completedText.value);
+});
+
+onBeforeMount(() => {
+  initSessionResponse();
+})
+
+onMounted(() => {
+  if (sessionResponse.value?.[props.currentIndex]) {
+    ([...sessionResponse.value?.[props.currentIndex]] || []).forEach((r, idx) => {
+      if (r !== "") completedText.value[idx] = r;
+    })
+  }
+})
 </script>
 
 <template>
@@ -78,6 +100,7 @@ async function copyToClipboard(text) {
             :index="numbers.indexOf(idx)"
             :expectedWord="props.correctWords[numbers.indexOf(idx)]"
             :onWordDropped="handleWordDrop"
+            :defaultValue="completedText?.[idx]"
           />
         </span>
       </p>

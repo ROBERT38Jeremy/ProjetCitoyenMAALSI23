@@ -24,6 +24,7 @@ onMounted(() => (textData.value = data));
     <FillInText
       v-if="textData.length > 0"
       :key="currentIndex"
+      :current-index="currentIndex"
       :title="textData[currentIndex].title"
       :text="textData[currentIndex].text"
       :words="textData[currentIndex].words"
