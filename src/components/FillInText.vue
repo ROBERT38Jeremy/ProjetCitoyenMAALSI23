@@ -108,11 +108,11 @@ onMounted(() => {
       <!-- Afficher l'exemple de code si toutes les réponses sont correctes -->
       <div
         v-if="isComplete"
-        class="mt-6 w-10/12 p-4 border border-green-400 rounded bg-green-50 self-center"
+        class="mt-6 w-10/12 p-4 border border-green-400 rounded bg-green-50 dark:bg-gray-900 self-center"
       >
         <h2 class="text-xl font-bold text-center text-green-600">Bravo !</h2>
         <p class="text-center">Voici un exemple de code que vous pouvez tester :</p>
-        <pre class="bg-gray-200 p-4 rounded text-sm overflow-x-auto language-html">
+        <pre class="bg-gray-200 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto language-html">
         	<code>{{ exampleCode }}</code>
       	</pre>
         <!-- Ajout d'un bouton pour tester le code -->
@@ -139,5 +139,17 @@ onMounted(() => {
 pre {
   max-height: 200px;
   overflow-y: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* defaults to dark theme */
+  body {
+    --text-color: #eee;
+    --bkg-color: #121212;
+  }
+  body.light-theme {
+    --text-color: #222;
+    --bkg-color: #fff;
+  }
 }
 </style>
