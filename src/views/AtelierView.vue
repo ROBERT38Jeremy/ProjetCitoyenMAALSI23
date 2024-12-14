@@ -1,27 +1,20 @@
 <script setup>
-import { ref } from 'vue';
-const test = ref(`
-	<style>
-		.test, .test * {
-			all: revert
-		}
-		.one {
-			color: red;
-		}
-	</style>
+import { onBeforeMount } from 'vue';
+import { style } from '@/data/exerciceStyle'
+import { html } from '@/data/execriceHtml';
+import usecodeDataStore from '@/stores/codeData.js';
+import CodeView from '@/components/CodeView.vue';
 
-<div class="test">
-	<h1>Test de rendu</h1>
-	<img src="https://img.fotocommunity.com/portrait-de-tigre-b414cb5c-b28d-4e13-a956-c8503d730e77.jpg?height=1000" />
-	<p class="one">Toto avec la class one</p>
-</div>
-`);
+const { updateCssDataValue, updateHtmlDataValue } = usecodeDataStore();
+
+onBeforeMount(() => {
+	updateCssDataValue(style);
+	updateHtmlDataValue(html);
+})
 </script>
 
 <template>
-  <div class="w-full h-full">
-    <div v-html="test"></div>
-  </div>
+	<CodeView />
 </template>
 
 <style scoped></style>

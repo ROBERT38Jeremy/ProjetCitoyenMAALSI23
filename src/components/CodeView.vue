@@ -6,7 +6,6 @@ const codeData = usecodeDataStore();
 </script>
 
 <template>
-  <h2 class="text-center font-bold text-2xl underline my-4">Bac à sable</h2>
   <div class="flex w-full justify-center content-center">
     <Monaco>
       <div

@@ -49,6 +49,7 @@ onMounted(() => (textData.value = data));
         </button>
       </div>
     </div>
+    <h2 class="text-center font-bold text-2xl underline my-4">Bac à sable</h2>
     <CodeView />
   </div>
 </template>

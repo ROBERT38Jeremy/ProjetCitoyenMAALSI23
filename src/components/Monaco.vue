@@ -54,10 +54,10 @@ function selectModel({ data = '', language }) {
 }
 
 const selectHTML = () => {
-  selectModel({ language: 'html' });
+  selectModel({ data: codeData.codeHtmlValue, language: 'html' });
 };
 const selectCss = () => {
-  selectModel({ language: 'css' });
+  selectModel({ data: codeData.cssDataValue, language: 'css' });
 };
 
 function updateCode({ data, language }) {
@@ -70,7 +70,7 @@ onMounted(() => {
     language: languageSelected.value,
   });
 
-  selectModel({ language: 'html' });
+  selectModel({ data: codeData.codeHtmlValue, language: 'html' });
 
   editor.onDidChangeModelContent((event) => {
     // getValue() = Obtenir le texte actuel dans l'éditeur
