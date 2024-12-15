@@ -1,5 +1,5 @@
-import { computed, ref } from 'vue'
-import { defineStore } from 'pinia'
+import { computed, ref } from 'vue';
+import { defineStore } from 'pinia';
 
 const usecodeDataStore = defineStore('codeData', () => {
   const cssDataValue = ref('');
@@ -16,8 +16,8 @@ const usecodeDataStore = defineStore('codeData', () => {
         }
         ${cssDataValue.value}
       }
-    </style>`
-  })
+    </style>`;
+  });
 
   function updateCssDataValue(value) {
     cssDataValue.value = value;
@@ -27,7 +27,19 @@ const usecodeDataStore = defineStore('codeData', () => {
     codeHtmlValue.value = value;
   }
 
-  return { cssDataValue, codeHtmlValue, htmlCss, updateCssDataValue, updateHtmlDataValue }
-})
+  function resetData() {
+    codeHtmlValue.value = '';
+		cssDataValue.value = '';
+  }
+
+  return {
+    cssDataValue,
+    codeHtmlValue,
+    htmlCss,
+    updateCssDataValue,
+    updateHtmlDataValue,
+    resetData,
+  };
+});
 
 export default usecodeDataStore;
