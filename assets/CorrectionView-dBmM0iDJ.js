@@ -1,14 +1,4 @@
-import{u as i,_ as a}from"./CodeView-ClKrCaK8.js";import{i as o,n,b as r}from"./index-BhB4vVHD.js";const s=`@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-}
-
-.main-container {
+import{_ as r,c as a,i as t,d as i,u as n,F as l,b as o}from"./index-3PCuDx0m.js";const s=`.main-container {
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -49,7 +39,7 @@ import{u as i,_ as a}from"./CodeView-ClKrCaK8.js";import{i as o,n,b as r}from"./
     color: hsl(214, 17%, 51%);
     margin-bottom: 18px;
     line-height: 1.5;
-}`,l=`<div class="main-container">
+}`,c=`<div class="main-container">
     <div class="article-card">
         <div class="img-box">
             <img src="https://i.postimg.cc/Zq6vZ4D1/drawers.jpg" alt="banner" class="article-banner">
@@ -72,4 +62,4 @@ import{u as i,_ as a}from"./CodeView-ClKrCaK8.js";import{i as o,n,b as r}from"./
         </div>
 
     </div>
-</div>`,g={__name:"AtelierView",setup(c){const{updateCssDataValue:e,updateHtmlDataValue:t}=i();return o(()=>{e(s),t(l)}),(d,p)=>(r(),n(a))}};export{g as default};
+</div>`,d={__name:"CorrectionView",setup(p){return(h,e)=>(o(),a(l,null,[e[0]||(e[0]=t("h1",null,"CSS",-1)),t("pre",null,i(n(s)),1),e[1]||(e[1]=t("h1",null,"HTML",-1)),t("pre",null,i(n(c)),1)],64))}},g=r(d,[["__scopeId","data-v-dfd5513e"]]);export{g as default};
