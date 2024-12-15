@@ -1,7 +1,11 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
+import { style } from '@/data/exerciceStyle';
+import { html } from '@/data/execriceHtml';
 
 const usecodeDataStore = defineStore('codeData', () => {
+  const atelierCss = ref(style);
+  const atelierHtml = ref(html);
   const cssDataValue = ref('');
   const codeHtmlValue = ref('');
   const htmlCss = computed(() => {
@@ -18,6 +22,20 @@ const usecodeDataStore = defineStore('codeData', () => {
       }
     </style>`;
   });
+  const atelierHtmlCss = computed(() => {
+    return `
+    <div class=scoped>
+      ${atelierHtml.value}
+    <div>
+    <style>
+      .scoped {
+        * {
+          all: revert;
+        }
+        ${atelierCss.value}
+      }
+    </style>`;
+  });
 
   function updateCssDataValue(value) {
     cssDataValue.value = value;
@@ -25,6 +43,14 @@ const usecodeDataStore = defineStore('codeData', () => {
 
   function updateHtmlDataValue(value) {
     codeHtmlValue.value = value;
+  }
+
+  function updateAtelierCssDataValue(value) {
+    atelierCss.value = value;
+  }
+
+  function updateAtelierHtmlDataValue(value) {
+    atelierHtml.value = value;
   }
 
   function resetData() {
@@ -39,6 +65,11 @@ const usecodeDataStore = defineStore('codeData', () => {
     updateCssDataValue,
     updateHtmlDataValue,
     resetData,
+    atelierCss,
+    atelierHtml,
+    updateAtelierCssDataValue,
+    updateAtelierHtmlDataValue,
+    atelierHtmlCss
   };
 });
 

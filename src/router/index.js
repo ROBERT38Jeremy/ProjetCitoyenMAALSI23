@@ -24,6 +24,14 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AtelierView.vue'),
     },
+    {
+      path: '/correction',
+      name: 'correction',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/CorrectionView.vue'),
+    },
   ],
 });
 

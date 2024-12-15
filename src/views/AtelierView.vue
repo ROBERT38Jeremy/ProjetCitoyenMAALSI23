@@ -1,28 +1,21 @@
 <script setup>
-import { onBeforeMount, onUnmounted } from 'vue';
-import { style } from '@/data/exerciceStyle';
-import { html } from '@/data/execriceHtml';
-import usecodeDataStore from '@/stores/codeData.js';
-import CodeView from '@/components/CodeView.vue';
+import AtelierCodeView from '@/components/AtelierCodeView.vue';
+import { useSessionDatas } from '@/stores/SessionDatas';
+import { onBeforeMount } from 'vue';
 
-const { updateCssDataValue, updateHtmlDataValue, resetData } = usecodeDataStore();
+const { initSessionCode } = useSessionDatas();
 
 onBeforeMount(() => {
-  updateCssDataValue(style);
-  updateHtmlDataValue(html);
-});
-
-onUnmounted(() => {
-  resetData();
-});
+  initSessionCode()
+})
 </script>
 
 <template>
   <div class="flex justify-center my-3">
-    <img src="/public/card_example.png" alt="" srcset="" />
+    <img src="/card_example.png" alt="" srcset="" />
   </div>
 
-  <CodeView />
+  <AtelierCodeView />
 </template>
 
 <style scoped></style>
